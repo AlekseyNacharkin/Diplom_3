@@ -12,8 +12,13 @@ class PersonalAccountPage(BasePage):
         self.wait = WebDriverWait(driver, 10)
 
     personal_account_url = "https://stellarburgers.nomoreparties.site/account/profile"
+    orders_history_url = "https://stellarburgers.nomoreparties.site/account/order-history"
 
-    #кнопка личного аккаунта в риббоне
-    personal_account_button = (By.XPATH,"//p[contains(text(),'Личный Кабинет')]")
     #кнопка профиль
     profile_button = (By.XPATH,"//a[contains(text(),'Профиль')]")
+    #кнопка история заказов
+    orders_history_button = (By.XPATH,'.//a[@href="/account/order-history"]')
+    #кнопка выхода из аккаунта
+    logout_button = (By.XPATH,'.//button[@class="Account_button__14Yp3 text text_type_main-medium text_color_inactive"]')
+
+

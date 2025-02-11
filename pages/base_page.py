@@ -1,5 +1,8 @@
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.by import By
+import time
 
 class BasePage:
     def __init__(self,driver,wait):
@@ -32,7 +35,6 @@ class BasePage:
         self.wait.until(EC.presence_of_element_located(locator))
 
     def wait_for_scroll_to_finish(self, timeout=5):
-        """Ожидание завершения загрузки страницы и окончания скролла"""
         self.wait.until(lambda d: d.execute_script("return document.readyState") == "complete")
 
         last_scroll_position = self.driver.execute_script("return window.scrollY")
@@ -41,4 +43,21 @@ class BasePage:
             lambda d: self.driver.execute_script("return window.scrollY") == last_scroll_position
         )
 
+    def text_in_element(self,locator):
+        return self.find_element(locator).text
 
+
+    def invisibility_element(self, locator):
+        self.wait.until(EC.invisibility_of_element_located(locator))
+
+    def drag_n_drop(self, locator1, locator2):
+        draggable = self.find_element(locator1)
+        droppable = self.find_element(locator2)
+
+        actions = ActionChains(self.driver)
+        (actions.click_and_hold(draggable)
+         .pause(1)  # Пауза 1 секунда
+         .move_to_element(droppable)
+         .pause(1)  # Пауза 1 секунда
+         .release()
+         .perform())
