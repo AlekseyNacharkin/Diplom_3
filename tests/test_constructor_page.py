@@ -41,6 +41,7 @@ class TestConstructorPage:
         constructor_page.is_displayed(ConstructorPage.fluorescentic_bun)
         constructor_page.drag_n_drop(ConstructorPage.fluorescentic_bun, ConstructorPage.drop_place)
         constructor_page.click(ConstructorPage.order_placement_button)
-        assert constructor_page.is_displayed(ConstructorPage.qwerty)
+        time.sleep(3)
+        assert "Modal_modal_opened__3ISw4 " in constructor_page.find_element(ConstructorPage.modal_class_before_order).get_dom_attribute("class")
 
 

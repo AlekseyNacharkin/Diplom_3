@@ -26,3 +26,7 @@ class ConstructorPage(BasePage):
     order_placement_button = (By.XPATH, "//button[contains(text(),'Оформить заказ')]")
     # проверка отображения элемента при заказе
     qwerty = (By.XPATH,'.//h2[@class="Modal_modal__title_shadow__3ikwq Modal_modal__title__2L34m text text_type_digits-large mb-8"]')
+    # проверка состояния класса (xpath класса)
+    modal_class_before_order = (By.XPATH,'.//section[@class="Modal_modal__P3_V5"]')
+    # проверка состояния класса после нажатия (xpath класса)
+    modal_class_before_order = (By.XPATH, './/section[@class="Modal_modal_opened__3ISw4 Modal_modal__P3_V5"]')
