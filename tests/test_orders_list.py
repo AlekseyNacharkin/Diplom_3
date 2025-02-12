@@ -27,4 +27,9 @@ class TestOrdersList:
         order_list = OrdersListPage(driver)
         order_list.click(OrdersListPage.first_order)
         assert order_list.text_in_element(OrdersListPage.сomposition) == "Cостав" #вот в этом тесте изменен символ первый символ на латиницу, видимо специальный баг
-        
+
+    def test_order_in_status_in_progress(self,driver,create_order):
+        base_ribbon = BaseRibbonPage(driver)
+        base_ribbon.click(BaseRibbonPage.orders_list_button)
+        order_list = OrdersListPage(driver)
+        assert order_list.located_order_in_state_in_progress(OrdersListPage.list_orders_in_state_in_progress,create_order) == create_order

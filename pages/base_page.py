@@ -59,8 +59,11 @@ class BasePage:
 
         actions = ActionChains(self.driver)
         (actions.click_and_hold(draggable)
-         .pause(1)  # Пауза 1 секунда
+         .pause(1)
          .move_to_element(droppable)
-         .pause(1)  # Пауза 1 секунда
+         .pause(1)
          .release()
          .perform())
+
+    def find_elements(self,locator):
+        return self.wait.until(EC.presence_of_all_elements_located(locator))

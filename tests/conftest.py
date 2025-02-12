@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -49,3 +51,9 @@ def create_order(driver,authorization):
     constructor_page = ConstructorPage(driver)
     constructor_page.is_displayed(ConstructorPage.fluorescentic_bun)
     constructor_page.drag_n_drop(ConstructorPage.fluorescentic_bun, ConstructorPage.drop_place)
+    constructor_page.drag_n_drop(ConstructorPage.fluorescentic_bun, ConstructorPage.drop_place)
+    constructor_page.drag_n_drop(ConstructorPage.biocotlet, ConstructorPage.drop_place)
+    constructor_page.drag_n_drop(ConstructorPage.spicy_x_sauce, ConstructorPage.drop_place)
+    constructor_page.click(ConstructorPage.order_placement_button)
+    time.sleep(1)
+    yield constructor_page.text_in_element(ConstructorPage.identificator_of_order)
