@@ -34,3 +34,5 @@ class ConstructorPage(BasePage):
     spicy_x_sauce = (By.XPATH,'.//a[@href="/ingredient/61c0c5a71d1f82001bdaaa72"]')
     # биокотлета
     biocotlet = (By.XPATH,'.//a[@href="/ingredient/61c0c5a71d1f82001bdaaa71"]')
+    # кнопка закрытия деталей заказа (оформленного)
+    button_closed_description_order = (By.XPATH,'.//button[@class="Modal_modal__close_modified__3V5XS Modal_modal__close__TnseK"][ancestor::section[@class="Modal_modal_opened__3ISw4 Modal_modal__P3_V5"]]')

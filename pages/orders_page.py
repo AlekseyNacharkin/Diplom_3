@@ -11,20 +11,25 @@ class OrdersListPage(BasePage):
         self.driver = driver
         self.wait = WebDriverWait(driver, 10)
 
+
+    order_list_url = "https://stellarburgers.nomoreparties.site/feed"
     #первый доступный заказ
     first_order = (By.XPATH,'.//a[@class="OrderHistory_link__1iNby"]')
     # состав текст
     сomposition = (By.XPATH, './/p[@class="text text_type_main-medium mb-8"]')
     # список заказов в работе
     list_orders_in_state_in_progress = (By.XPATH,'.//ul[@class="OrderFeed_orderListReady__1YFem OrderFeed_orderList__cBvyi"]/li')
-
+    # каунтер заказов за все время
+    counter_orders_of_all_time = (By.XPATH,'.//p[contains(text(), "Выполнено за все время:")]/following-sibling::p[@class="OrderFeed_number__2MbrQ text text_type_digits-large"]')
+    # каунтер заказов за сегодня
+    counter_orders_completed_today = (By.XPATH,'.//p[contains(text(), "Выполнено за сегодня:")]/following-sibling::p[@class="OrderFeed_number__2MbrQ text text_type_digits-large"]')
 
 
     def located_order_in_state_in_progress(self,locator,text):
         elements = self.find_elements(locator)
         for element in elements:
             if text in element.text:
-                return element
+                return text
         return None
 
 

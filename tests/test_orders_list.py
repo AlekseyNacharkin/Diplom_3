@@ -32,4 +32,7 @@ class TestOrdersList:
         base_ribbon = BaseRibbonPage(driver)
         base_ribbon.click(BaseRibbonPage.orders_list_button)
         order_list = OrdersListPage(driver)
+        #counter_completed_orders_of_all_time, counter_completed_orders_today, order_id = create_order
         assert order_list.located_order_in_state_in_progress(OrdersListPage.list_orders_in_state_in_progress,create_order) == create_order
+
+    #def test_change_counter_completed_orders_today(self,driver):

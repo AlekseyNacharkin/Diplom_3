@@ -9,7 +9,7 @@ from selenium import webdriver
 from Diplom_3.pages.api_client import APIClient
 from Diplom_3.pages.constructor_page import ConstructorPage
 from Diplom_3.pages.login_page import LoginPage
-
+from Diplom_3.pages.orders_page import OrdersListPage
 
 @pytest.fixture(params=["chrome"])#, "firefox"])
 def driver(request):
@@ -48,12 +48,29 @@ def authorization(get_user_value,driver):
 
 @pytest.fixture
 def create_order(driver,authorization):
+    order_list = OrdersListPage(driver)
+    order_list.get_url_page(OrdersListPage.order_list_url)
+    counter_completed_orders_of_all_time = order_list.text_in_element(OrdersListPage.counter_orders_of_all_time)
+    counter_completed_orders_today = order_list.text_in_element(OrdersListPage.counter_orders_completed_today)
     constructor_page = ConstructorPage(driver)
+    constructor_page.get_url_page(ConstructorPage.constructor_url)
     constructor_page.is_displayed(ConstructorPage.fluorescentic_bun)
     constructor_page.drag_n_drop(ConstructorPage.fluorescentic_bun, ConstructorPage.drop_place)
     constructor_page.drag_n_drop(ConstructorPage.fluorescentic_bun, ConstructorPage.drop_place)
     constructor_page.drag_n_drop(ConstructorPage.biocotlet, ConstructorPage.drop_place)
     constructor_page.drag_n_drop(ConstructorPage.spicy_x_sauce, ConstructorPage.drop_place)
     constructor_page.click(ConstructorPage.order_placement_button)
-    time.sleep(1)
-    yield constructor_page.text_in_element(ConstructorPage.identificator_of_order)
+
+    # Ждем, пока номер заказа не появится (максимум 10 секунд)
+    timeout = 10
+    start_time = time.time()
+
+    while True:
+        order_id = constructor_page.text_in_element(ConstructorPage.identificator_of_order)
+        if order_id != '9999':  # Если order_id появился, выходим из цикла
+            break
+        if time.time() - start_time > timeout:  # Если вышли за 10 секунд, тоже выходим
+            raise TimeoutError("Order ID не появился в течение 10 секунд")
+        time.sleep(0.5)  # Ждем 0.5 секунды перед повторной проверкой
+    constructor_page.click(ConstructorPage.button_closed_description_order)
+    yield order_id
