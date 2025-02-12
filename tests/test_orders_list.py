@@ -12,6 +12,7 @@ from Diplom_3.pages.restore_password_page import RestorePasswordPage
 from Diplom_3.pages.personal_account_page import PersonalAccountPage
 from Diplom_3.pages.constructor_page import ConstructorPage
 from Diplom_3.pages.ribbon_page import BaseRibbonPage
+from Diplom_3.pages.orders_page import OrdersListPage
 
 class TestOrdersList:
 
@@ -20,4 +21,10 @@ class TestOrdersList:
         ribbon.click(BaseRibbonPage.orders_list_button)
         assert driver.current_url == BaseRibbonPage.order_list_url
 
-    def test_
+    def test_order_details(self,driver,create_order):
+        base_ribbon = BaseRibbonPage(driver)
+        base_ribbon.click(BaseRibbonPage.orders_list_button)
+        order_list = OrdersListPage(driver)
+        order_list.click(OrdersListPage.first_order)
+        assert order_list.text_in_element(OrdersListPage.сomposition) == "Cостав" #вот в этом тесте изменен символ первый символ на латиницу, видимо специальный баг
+        

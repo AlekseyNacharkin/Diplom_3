@@ -46,6 +46,9 @@ class BasePage:
     def text_in_element(self,locator):
         return self.find_element(locator).text
 
+    def get_element_class(self,locator,classname):
+        return self.find_element(locator).get_dom_attribute(classname)
+
 
     def invisibility_element(self, locator):
         self.wait.until(EC.invisibility_of_element_located(locator))
