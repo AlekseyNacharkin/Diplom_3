@@ -73,4 +73,4 @@ def create_order(driver,authorization):
             raise TimeoutError("Order ID не появился в течение 10 секунд")
         time.sleep(0.5)  # Ждем 0.5 секунды перед повторной проверкой
     constructor_page.click(ConstructorPage.button_closed_description_order)
-    yield order_id
+    yield counter_completed_orders_of_all_time,counter_completed_orders_today,order_id

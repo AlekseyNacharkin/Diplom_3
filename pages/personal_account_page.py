@@ -20,5 +20,7 @@ class PersonalAccountPage(BasePage):
     orders_history_button = (By.XPATH,'.//a[@href="/account/order-history"]')
     #кнопка выхода из аккаунта
     logout_button = (By.XPATH,'.//button[@class="Account_button__14Yp3 text text_type_main-medium text_color_inactive"]')
+    # идентификатор заказа пользователя
+    identificator_of_order = (By.XPATH,'.//p[@class="text text_type_digits-default"]')
 
 
