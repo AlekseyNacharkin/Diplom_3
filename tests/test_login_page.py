@@ -2,9 +2,12 @@ from Diplom_3.constants import *
 from Diplom_3.pages.login_page import LoginPage
 from Diplom_3.pages.forgot_password_page import ForgotPasswordPage
 from Diplom_3.pages.restore_password_page import RestorePasswordPage
+import allure
+
 
 class TestLoginPage():
 
+    @allure.title("Тест видимости пароля после нажатия на кнопку отображения пароля")
     def test_show_user_password(self,driver):
         login_page = LoginPage(driver)
         login_page.get_url_page(LoginPage.login_url)
@@ -14,6 +17,7 @@ class TestLoginPage():
         login_page.click(LoginPage.eyes_button)
         assert login_page.is_displayed(LoginPage.parent_element_eyes_button_in_active_state)
 
+    @allure.title("Тест открытия окна восстановления пароля")
     def test_restore_password(self,driver):
         login_page = LoginPage(driver)
         login_page.get_url_page(LoginPage.login_url)
