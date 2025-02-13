@@ -8,7 +8,7 @@ from Diplom_3.pages.login_page import LoginPage
 from Diplom_3.pages.orders_page import OrdersListPage
 from Diplom_3.constants import *
 
-@pytest.fixture(params=["chrome"])#, "firefox"])
+@pytest.fixture(params=["chrome","firefox"])
 def driver(request):
     if request.param == "chrome":
         driver = webdriver.Chrome()
