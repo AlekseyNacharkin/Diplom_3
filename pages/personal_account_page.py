@@ -1,0 +1,23 @@
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from Diplom_3.pages.base_page import BasePage
+
+
+class PersonalAccountPage(BasePage):
+    def __init__(self, driver):
+        self.driver = driver
+        self.wait = WebDriverWait(driver, 10)
+
+    personal_account_url = "https://stellarburgers.nomoreparties.site/account/profile"
+    orders_history_url = "https://stellarburgers.nomoreparties.site/account/order-history"
+
+    #кнопка профиль
+    profile_button = (By.XPATH,"//a[contains(text(),'Профиль')]")
+    #кнопка история заказов
+    orders_history_button = (By.XPATH,'.//a[@href="/account/order-history"]')
+    #кнопка выхода из аккаунта
+    logout_button = (By.XPATH,'.//button[@class="Account_button__14Yp3 text text_type_main-medium text_color_inactive"]')
+    # идентификатор заказа пользователя
+    identificator_of_order = (By.XPATH,'.//p[@class="text text_type_digits-default"]')
+
+
